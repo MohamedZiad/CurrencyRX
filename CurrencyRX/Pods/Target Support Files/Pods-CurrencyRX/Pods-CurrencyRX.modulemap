@@ -1,0 +1,6 @@
+module Pods_CurrencyRX {
+  umbrella header "Pods-CurrencyRX-umbrella.h"
+
+  export *
+  module * { export * }
+}
