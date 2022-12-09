@@ -55,32 +55,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6C869B5E-62AB-4D20-9B6B-FC5A2B8201CB"
+            uuid = "1A195941-A8B1-4FE7-82D8-07DBBF3601DF"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CurrencyRX/View/MainView/MainViewController.swift"
+            filePath = "CurrencyRX/View/MainView/ViewModel/MainViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "subscribeToTableViewDidSelect()"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "convertCurrencies()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C4BCA720-94A9-42D4-9AE9-4AEA05A713F5"
+            uuid = "2BC2093C-79F0-4DFF-9700-FF5401D62A2A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CurrencyRX/View/MainView/MainViewController.swift"
+            filePath = "CurrencyRX/View/MainView/ViewModel/MainViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "subscribeToTableViewDidSelect()"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "convertCurrencies()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -26,6 +26,7 @@ import Foundation
 
 struct CountriesSymbol: Codable {
     let symbols : [String: String]?
+    let success: Bool?
     
     mutating func getKeysArra() -> [String] {
         var array = [String]()
@@ -36,24 +37,27 @@ struct CountriesSymbol: Codable {
     }
     
     
-//    var keys:[String] {
-//        symbols?.compactMap({ key, value in
-//            keys.append(key)
-//        }) as! [String]
-//
-//    }
-//
-    
     
     
     enum CodingKeys: String, CodingKey {
+        case success
         case symbols
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         symbols = try container.decodeIfPresent([String:String].self, forKey: .symbols) ?? [:]
+        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
     }
     
 }
+
+
+
+struct CovertResult: Codable {
+    let success: Bool?
+    let result: Double?
+    
+}
+    
 

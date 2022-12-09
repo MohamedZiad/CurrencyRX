@@ -36,6 +36,10 @@ class MainViewController: UIViewController {
         subscribeToSelectedFromCountry()
         subscribeTodisableSwitch()
         subscribeToSwitchButton()
+        subscribeToConvertTextField()
+        subscribetToConvertCurrency()
+        subscribeToResultLabel()
+        subscribeToError()
     }
     
     
@@ -68,12 +72,22 @@ class MainViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
     
+    func subscribeToResultLabel() {
+        mainViewModel.resultConverted
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self]value in
+            self?.convertedTolabel.text = value.element?.description
+        }
+        .disposed(by: disposeBag)
+    }
+    
     func subscribeToSwitchButton() {
         switchButton.rx.tap.subscribe { [weak self](_) in
             self?.mainViewModel.countryCodeSelectedFrom.accept(self?.toLabel.text ?? "")
             self?.mainViewModel.countryCodeSelectedTo.accept(self?.fromLabel.text ?? "")
             self?.toLabel.text = self?.mainViewModel.countryCodeSelectedTo.value
             self?.fromLabel.text = self?.mainViewModel.countryCodeSelectedFrom.value
+            self?.mainViewModel.convertCurrencies()
         }.disposed(by: disposeBag)
     }
     
@@ -88,12 +102,37 @@ class MainViewController: UIViewController {
             .disposed(by: disposeBag)
         }
     
+    func subscribetToConvertCurrency() {
+        
+        converTextField.rx.text.orEmpty
+            .skip(1)
+            .distinctUntilChanged()
+            .throttle(RxTimeInterval.microseconds(500), scheduler: MainScheduler.instance)
+            .subscribe { value in
+                if !(value.element?.isEmpty ?? false){
+                    self.mainViewModel.convertCurrencies()
+                }
+            }.disposed(by: disposeBag)
+    }
+    
     
     func bindTableView() {
         mainViewModel.countriesCodeBehaviour.bind(to: dropDownTableView.rx.items(cellIdentifier: "CellIdentifier", cellType: DropDownCell.self)) { row, model, cell in
             cell.configureCell(currency: model)
         }.disposed(by: disposeBag)
         print(mainViewModel.countriesCodeBehaviour.value.count)
+    }
+    
+    func subscribeToError() {
+        mainViewModel.errorBehavior
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe {[weak self] error in
+                if error.element ?? false  {
+                    self?.errorAlert()
+                }
+                
+        }.disposed(by: disposeBag)
     }
     
     
@@ -108,16 +147,14 @@ class MainViewController: UIViewController {
                 self?.toLabel.text = self?.mainViewModel.countryCodeSelectedTo.value
             }
             self?.dropDownTableView.isHidden = true
-           
-            
         }).disposed(by: disposeBag)
     }
     
-
-    
     func errorAlert() {
-        let alert = UIAlertController(title: "Error", message: "Check your Internet connection and Try Again!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        let alert = UIAlertController(title: "Error", message: mainViewModel.errorMessageBehaviour.value, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ok", style: .cancel, handler: { [weak self]_ in
+            self?.mainViewModel.errorBehavior.accept(false)
+        }))
         self.present(alert, animated: true, completion: nil)
     }
 }
