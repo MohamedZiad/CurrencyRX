@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "BED96DF7-6CBE-47AE-B0D7-452EE437D429"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8F444F32-24EC-4E44-B77F-DAE16F41BA54"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CurrencyRX/View/CurrencyService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "fetchAvalibleCurrencies()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8F444F32-24EC-4E44-B77F-DAE16F41BA54 - afef7ff942314191"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (RxSwift.AnyObserver&lt;CurrencyRX.CountriesSymbol&gt;) -&gt; RxSwift.Disposable in CurrencyRX.CurrencyService.fetchAvalibleCurrencies() -&gt; RxSwift.Observable&lt;CurrencyRX.CountriesSymbol&gt;"
+                  moduleName = "CurrencyRX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ser/Desktop/currencyrx/CurrencyRX/CurrencyRX/View/CurrencyService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "1559">
+               </Location>
+               <Location
+                  uuid = "8F444F32-24EC-4E44-B77F-DAE16F41BA54 - ebabf14ac20b41c7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (RxSwift.AnyObserver&lt;CurrencyRX.CountriesSymbol&gt;) -&gt; RxSwift.Disposable in CurrencyRX.CurrencyService.fetchAvalibleCurrencies() -&gt; RxSwift.Observable&lt;CurrencyRX.CountriesSymbol&gt;"
+                  moduleName = "CurrencyRX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ser/Desktop/currencyrx/CurrencyRX/CurrencyRX/View/CurrencyService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "179">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6C869B5E-62AB-4D20-9B6B-FC5A2B8201CB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CurrencyRX/View/MainView/MainViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "subscribeToTableViewDidSelect()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C4BCA720-94A9-42D4-9AE9-4AEA05A713F5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CurrencyRX/View/MainView/MainViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "subscribeToTableViewDidSelect()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
