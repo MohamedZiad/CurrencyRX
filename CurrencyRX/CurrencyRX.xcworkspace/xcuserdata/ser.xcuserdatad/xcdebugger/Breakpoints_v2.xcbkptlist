@@ -55,33 +55,113 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1A195941-A8B1-4FE7-82D8-07DBBF3601DF"
+            uuid = "5777B0EC-0475-456E-8416-2B9DB50F845E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CurrencyRX/View/MainView/ViewModel/MainViewModel.swift"
+            filePath = "CurrencyRX/View/MainView/ViewController/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "convertCurrencies()"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "navigateToDetailsView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2BC2093C-79F0-4DFF-9700-FF5401D62A2A"
+            uuid = "C741C760-8717-466E-92B2-6171DBE35C66"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CurrencyRX/View/MainView/ViewModel/MainViewModel.swift"
+            filePath = "CurrencyRX/View/MainView/ViewController/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "convertCurrencies()"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "navigateToDetailsView()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "00B6D6AA-0BA9-4BD1-895B-27D22CCC3223"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CurrencyRX/View/DetailsView/ViewModel/DetailsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "fetchDetails()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3B7F43C8-4A96-4AF7-9DFC-F260E800DE2E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CurrencyRX/View/DetailsView/ViewModel/DetailsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "fetchLatest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9F9BABB5-27A3-4306-B283-43F5963BF268"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CurrencyRX/View/DetailsView/ViewModel/DetailsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "fetchDetails()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9F9BABB5-27A3-4306-B283-43F5963BF268 - 298be82a13dab03b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CurrencyRX.DetailsViewModel.fetchDetails() -&gt; ()"
+                  moduleName = "CurrencyRX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ser/Desktop/currencyrx/CurrencyRX/CurrencyRX/View/DetailsView/ViewModel/DetailsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "2132">
+               </Location>
+               <Location
+                  uuid = "9F9BABB5-27A3-4306-B283-43F5963BF268 - 109ec45bb7791f18"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CurrencyRX.DetailsViewModel.fetchDetails() -&gt; ()"
+                  moduleName = "CurrencyRX"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ser/Desktop/currencyrx/CurrencyRX/CurrencyRX/View/DetailsView/ViewModel/DetailsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "161">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

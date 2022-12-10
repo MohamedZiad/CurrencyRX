@@ -10,7 +10,8 @@ import Foundation
 enum NetworkEndpoint {
     case symbols
     case convert
-    
+    case timeSeries
+    case latest
     
     var url: String {
         switch self {
@@ -18,6 +19,11 @@ enum NetworkEndpoint {
             return "https://api.apilayer.com/fixer/symbols"
         case .convert:
                return "https://api.apilayer.com/fixer/convert"
+        case .timeSeries:
+            return "https://api.apilayer.com/fixer/timeseries"
+        case .latest:
+            return "https://api.apilayer.com/fixer/latest"
+            
         }
     }
 }

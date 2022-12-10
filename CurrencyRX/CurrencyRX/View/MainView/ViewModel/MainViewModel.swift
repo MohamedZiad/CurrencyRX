@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Foundation
 import RxSwift
 import RxCocoa
 
@@ -24,6 +23,8 @@ final class MainViewModel {
     var errorMessageBehaviour = BehaviorRelay<String>(value: "")
     var symbolKeys = [String]()
     var resultConverted = BehaviorRelay<Double>(value: 0.0)
+    private var countriesModel = PublishSubject<CountriesSymbol>()
+    
     var isCountryFromSelected: Observable<Bool> {
         return countryCodeSelectedFrom.asObservable().map { (country) -> Bool in
             let isSelected = !country.isEmpty
@@ -31,14 +32,13 @@ final class MainViewModel {
         }
     }
     
-    
     var isCountryToSelected: Observable<Bool> {
         return countryCodeSelectedTo.asObservable().map { (country) -> Bool in
             let isSelected = !country.isEmpty
             return isSelected
         }
     }
-        
+    
     var isSwitchButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(isCountryFromSelected, isCountryToSelected) { (fromSelected, toSelected) in
             let switchEnabled = fromSelected && toSelected
@@ -46,13 +46,22 @@ final class MainViewModel {
             
         }
     }
-
-    private var countriesModel = PublishSubject<CountriesSymbol>()
-    
+    var didConvertvalue: Observable<Bool> {
+        return resultConverted.asObservable().map { (value) -> Bool in
+            let didConvert = value != 0.0
+            return didConvert
+        }
+    }
+    var isDetailsButtonEnabled: Observable<Bool> {
+        return Observable.combineLatest(isCountryFromSelected, isCountryToSelected, didConvertvalue) { (fromSelected, toSelected, converted) in
+            let detailsEnabled =  fromSelected && toSelected && converted
+            return detailsEnabled
+        }
+    }
     var countriesModelObeservable: Observable<CountriesSymbol> {
         return countriesModel
     }
-    
+ 
     func fetchAvalibleCurrencies() {
         loadingBehaviour.accept(true)
         var components = URLComponents(string:  NetworkEndpoint.symbols.url)!
@@ -89,7 +98,7 @@ final class MainViewModel {
     
     
     func convertCurrencies() {
-//        loadingBehaviour.accept(true)
+        //        loadingBehaviour.accept(true)
         var components = URLComponents(string:  NetworkEndpoint.convert.url)!
         let parameters = ["apikey": APIClient.api_key, "from": countryCodeSelectedFrom.value, "to": countryCodeSelectedTo.value, "amount":converFromBehavior.value]
         components.queryItems = parameters.map(URLQueryItem.init)
@@ -99,7 +108,7 @@ final class MainViewModel {
         let task = URLSession.shared.dataTask(with: urlRequest) {[weak self] data, response, err in
             guard let data = data else {return}
             do {
-                guard  var data = try? JSONDecoder().decode(CovertResult.self, from: data) else {return}
+                guard let data = try? JSONDecoder().decode(CovertResult.self, from: data) else {return}
                 if data.success ?? false {
                     self?.resultConverted.accept(data.result ?? 0.0)
                     self?.errorBehavior.accept(false)
@@ -107,7 +116,7 @@ final class MainViewModel {
                     self?.errorBehavior.accept(true)
                     self?.errorMessageBehaviour.accept("Error in converting")
                 }
-               
+                
             } catch let parseError {
                 print("Error in Convert:\(parseError.localizedDescription)")
                 print(parseError)

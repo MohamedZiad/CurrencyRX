@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		8D73F92A0658877B39D14344 /* libPods-CurrencyRX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 214D7E0881D0B53B3816A9E1 /* libPods-CurrencyRX.a */; };
 		D69F094A2942B4230068F91D /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69F09492942B4230068F91D /* DropDownCell.swift */; };
+		D6B21B462943E49A003F8C03 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B21B452943E49A003F8C03 /* DetailsViewModel.swift */; };
+		D6B21B482943E4C3003F8C03 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B21B472943E4C3003F8C03 /* DetailsViewController.swift */; };
+		D6B21B4D294400D9003F8C03 /* HisotryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B21B4C294400D9003F8C03 /* HisotryCell.swift */; };
+		D6B21B5029444553003F8C03 /* OtherCurrenciesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B21B4F29444553003F8C03 /* OtherCurrenciesCell.swift */; };
 		D6D4F9F42942CCEC00AEDDED /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4F9F32942CCEC00AEDDED /* CurrencyService.swift */; };
 		D6F0E1802942A55900A9567D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0E17F2942A55900A9567D /* AppDelegate.swift */; };
 		D6F0E1822942A55900A9567D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0E1812942A55900A9567D /* SceneDelegate.swift */; };
@@ -51,6 +55,10 @@
 		214D7E0881D0B53B3816A9E1 /* libPods-CurrencyRX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CurrencyRX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF5621E50618828E5FA5006C /* Pods-CurrencyRX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyRX.release.xcconfig"; path = "Target Support Files/Pods-CurrencyRX/Pods-CurrencyRX.release.xcconfig"; sourceTree = "<group>"; };
 		D69F09492942B4230068F91D /* DropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
+		D6B21B452943E49A003F8C03 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		D6B21B472943E4C3003F8C03 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		D6B21B4C294400D9003F8C03 /* HisotryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HisotryCell.swift; sourceTree = "<group>"; };
+		D6B21B4F29444553003F8C03 /* OtherCurrenciesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherCurrenciesCell.swift; sourceTree = "<group>"; };
 		D6D4F9F32942CCEC00AEDDED /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
 		D6F0E17C2942A55900A9567D /* CurrencyRX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyRX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F0E17F2942A55900A9567D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +128,49 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D6B21B432943E464003F8C03 /* DetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				D6B21B472943E4C3003F8C03 /* DetailsViewController.swift */,
+				D6B21B442943E48B003F8C03 /* ViewModel */,
+			);
+			path = DetailsView;
+			sourceTree = "<group>";
+		};
+		D6B21B442943E48B003F8C03 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D6B21B452943E49A003F8C03 /* DetailsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D6B21B492943E594003F8C03 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				D6D4F9F32942CCEC00AEDDED /* CurrencyService.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		D6B21B4A2943E5B7003F8C03 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D6F0E1C22942A7EE00A9567D /* MainViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		D6B21B4B2943E5C8003F8C03 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				D69F09492942B4230068F91D /* DropDownCell.swift */,
+				D6B21B4F29444553003F8C03 /* OtherCurrenciesCell.swift */,
+				D6B21B4C294400D9003F8C03 /* HisotryCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
 		D6F0E1732942A55900A9567D = {
 			isa = PBXGroup;
 			children = (
@@ -145,10 +196,11 @@
 		D6F0E17E2942A55900A9567D /* CurrencyRX */ = {
 			isa = PBXGroup;
 			children = (
+				D6F0E1B82942A6AC00A9567D /* Models */,
 				D6F0E1C02942A7D800A9567D /* View */,
 				D6F0E1BB2942A6F000A9567D /* Enums */,
-				D6F0E1B82942A6AC00A9567D /* Models */,
 				D6F0E1AF2942A62200A9567D /* NetworkLayer */,
+				D6B21B4B2943E5C8003F8C03 /* TableViewCells */,
 				D6F0E17F2942A55900A9567D /* AppDelegate.swift */,
 				D6F0E1812942A55900A9567D /* SceneDelegate.swift */,
 				D6F0E1832942A55900A9567D /* ViewController.swift */,
@@ -208,9 +260,8 @@
 		D6F0E1C02942A7D800A9567D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D6B21B432943E464003F8C03 /* DetailsView */,
 				D6F0E1C12942A7DE00A9567D /* MainView */,
-				D69F09492942B4230068F91D /* DropDownCell.swift */,
-				D6D4F9F32942CCEC00AEDDED /* CurrencyService.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -218,8 +269,9 @@
 		D6F0E1C12942A7DE00A9567D /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				D6B21B4A2943E5B7003F8C03 /* ViewController */,
+				D6B21B492943E594003F8C03 /* NetworkService */,
 				D6F0E1C42942A8AF00A9567D /* ViewModel */,
-				D6F0E1C22942A7EE00A9567D /* MainViewController.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -391,14 +443,18 @@
 			files = (
 				D6F0E1BF2942A71800A9567D /* ResultType.swift in Sources */,
 				D6F0E1BD2942A70100A9567D /* Result.swift in Sources */,
+				D6B21B462943E49A003F8C03 /* DetailsViewModel.swift in Sources */,
 				D6F0E1842942A55A00A9567D /* ViewController.swift in Sources */,
 				D6F0E1802942A55900A9567D /* AppDelegate.swift in Sources */,
 				D6D4F9F42942CCEC00AEDDED /* CurrencyService.swift in Sources */,
 				D6F0E1C32942A7EE00A9567D /* MainViewController.swift in Sources */,
 				D6F0E1B12942A65700A9567D /* APIRequest.swift in Sources */,
 				D69F094A2942B4230068F91D /* DropDownCell.swift in Sources */,
+				D6B21B5029444553003F8C03 /* OtherCurrenciesCell.swift in Sources */,
+				D6B21B4D294400D9003F8C03 /* HisotryCell.swift in Sources */,
 				D6F0E1BA2942A6C600A9567D /* SymbolModel.swift in Sources */,
 				D6F0E1B72942A69600A9567D /* EndPoints.swift in Sources */,
+				D6B21B482943E4C3003F8C03 /* DetailsViewController.swift in Sources */,
 				D6F0E1B52942A68500A9567D /* SymbolsRequest.swift in Sources */,
 				D6F0E1B32942A66B00A9567D /* APIClient.swift in Sources */,
 				D6F0E1822942A55900A9567D /* SceneDelegate.swift in Sources */,

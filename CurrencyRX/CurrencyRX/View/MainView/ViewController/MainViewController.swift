@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var switchButton: UIButton!
     @IBOutlet weak var toLabel: UILabel!
     @IBOutlet weak var fromLabel: UILabel!
-    
+    @IBOutlet weak var detailsButton: UIButton!
     private let disposeBag = DisposeBag()
     let mainViewModel = MainViewModel()
     
@@ -40,6 +40,8 @@ class MainViewController: UIViewController {
         subscribetToConvertCurrency()
         subscribeToResultLabel()
         subscribeToError()
+        subscribeTodisableDetails()
+        didTapOnDetails()
     }
     
     
@@ -62,6 +64,19 @@ class MainViewController: UIViewController {
             self?.dropDownTableView.isHidden.toggle()
         }.disposed(by: disposeBag)
         
+    }
+    
+    func subscribeTodisableDetails() {
+        mainViewModel.isDetailsButtonEnabled.bind(to: detailsButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+    }
+    
+    func didTapOnDetails() {
+        detailsButton.rx.tap.subscribe { [weak self] (_) in
+            print("Navigating")
+            self?.navigateToDetailsView()
+        }
+        .disposed(by: disposeBag)
     }
     
     func subscribeToSelectedFromCountry() {
@@ -87,7 +102,9 @@ class MainViewController: UIViewController {
             self?.mainViewModel.countryCodeSelectedTo.accept(self?.fromLabel.text ?? "")
             self?.toLabel.text = self?.mainViewModel.countryCodeSelectedTo.value
             self?.fromLabel.text = self?.mainViewModel.countryCodeSelectedFrom.value
-            self?.mainViewModel.convertCurrencies()
+            if !(self?.mainViewModel.converFromBehavior.value.isEmpty ?? false) {
+                self?.mainViewModel.convertCurrencies()
+            }
         }.disposed(by: disposeBag)
     }
     
@@ -109,7 +126,7 @@ class MainViewController: UIViewController {
             .distinctUntilChanged()
             .throttle(RxTimeInterval.microseconds(500), scheduler: MainScheduler.instance)
             .subscribe { value in
-                if !(value.element?.isEmpty ?? false){
+                if !(value.element?.isEmpty ?? false) && value.element != "0" {
                     self.mainViewModel.convertCurrencies()
                 }
             }.disposed(by: disposeBag)
@@ -156,5 +173,16 @@ class MainViewController: UIViewController {
             self?.mainViewModel.errorBehavior.accept(false)
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func navigateToDetailsView() {
+        let detailsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "DetailsViewController") as DetailsViewController
+         detailsVC.selectedFromCurrency = mainViewModel.countryCodeSelectedFrom.value
+        for symbol in mainViewModel.countriesCodeBehaviour.value.filter({$0 != mainViewModel.countryCodeSelectedFrom.value }) {
+           
+            detailsVC.latestSymbols.append(symbol)
+        }
+            self.present(detailsVC, animated: true)
     }
 }
