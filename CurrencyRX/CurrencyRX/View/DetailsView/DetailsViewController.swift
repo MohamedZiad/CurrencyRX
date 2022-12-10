@@ -9,15 +9,20 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Charts
+import SwiftUI
 
 class DetailsViewController: UIViewController {
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var latestTableView: UITableView!
     
     var selectedFromCurrency: String? = ""
+    var selectedToCurrnecy: String? = ""
     var latestSymbols: [String] = []
     private let disposeBag = DisposeBag()
     let detailsViewModel = DetailsViewModel()
+    var chartModel = ChartModel(data: [])
+    var tranarray: [ChartResultModel] = []
     
     @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
@@ -26,27 +31,34 @@ class DetailsViewController: UIViewController {
         detailsViewModel.getDate()
         bindHistoryTableView()
         bindLatestTableView()
+
     }
     override func viewDidAppear(_ animated: Bool) {
         detailsViewModel.fetchLatest()
         detailsViewModel.fetchDetails()
     }
     
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true)
+        
+    }
+
     private func getDetails() {
         detailsViewModel.fromBehaviour.accept(selectedFromCurrency ?? "")
         detailsViewModel.latestSymbolsBehaviour.accept(latestSymbols.suffix(10))
+        detailsViewModel.toSymbolBehaviour.accept(selectedToCurrnecy ?? "")
         titleLabel.text = detailsViewModel.fromBehaviour.value
     }
     
     func bindHistoryTableView() {
         let dataSource = RxTableViewSectionedReloadDataSource<SectionViewModel> { _, tableview, index, item in
             let cell = tableview.dequeueReusableCell(withIdentifier: "historyCell", for: index) as! HisotryCell
-            cell.currencyCostLabel.text = item.value.description
+            cell.currencyCostLabel.text = item.value.roundToDecimal(3).removeZerosFromEnd()
             cell.currencyNameLabel.text = item.country
             return cell
         } titleForHeaderInSection: { dataSource, sectionIndex in
             return dataSource[sectionIndex].header
-        } 
+        }
         
         self.detailsViewModel.detailsModelObeservable
             .map({ series in
@@ -60,14 +72,12 @@ class DetailsViewController: UIViewController {
             .disposed(by: self.disposeBag)
     }
     
-    
     func bindLatestTableView() {
         detailsViewModel.latestSymbols
             .map({$0.rates ?? [:]})
             .bind(to: latestTableView.rx.items(cellIdentifier: "othersCell", cellType: OtherCurrenciesCell.self)) { row, model, cell in
-                cell.currencyNameLabel.text = model.value.description
+                cell.currencyNameLabel.text = model.value.roundToDecimal(3).removeZerosFromEnd()
                 cell.currencyLabel.text = model.key
-                
         }.disposed(by: disposeBag)
     }
     

@@ -19,6 +19,7 @@ final class DetailsViewModel {
     var endDateBehaviour = BehaviorRelay<String>(value: "")
     var latestSymbolsBehaviour =  BehaviorRelay<[String]>(value: [])
     var latestSymbols = PublishSubject<LatestRates>()
+    var toSymbolBehaviour = BehaviorRelay<String>(value: "")
     private var detailsModel = PublishSubject<TimeSeries>()
     
     var detailsModelObeservable: Observable<TimeSeries> {
@@ -29,7 +30,7 @@ final class DetailsViewModel {
     func fetchDetails() {
         loadingBehaviour.accept(true)
         var components = URLComponents(string:  NetworkEndpoint.timeSeries.url)!
-        let parameters = ["apikey": APIClient.api_key, "base":fromBehaviour.value, "start_date":startDateBehaviour.value,"end_date": endDateBehaviour.value ]
+        let parameters = ["apikey": APIClient.api_key, "base":fromBehaviour.value, "start_date":startDateBehaviour.value,"end_date": endDateBehaviour.value, "symbols": toSymbolBehaviour.value]
         components.queryItems = parameters.map(URLQueryItem.init)
         let url = components.url!
         var urlRequest = URLRequest(url: url)
@@ -58,7 +59,6 @@ final class DetailsViewModel {
         task.resume()
     }
     
-    
     func getDate() {
         let todaydate = Date()
         let fomatter = DateFormatter()
@@ -70,7 +70,6 @@ final class DetailsViewModel {
         startDateBehaviour.accept(endDate)
     }
     
-    
     func fetchLatest() {
         loadingBehaviour.accept(true)
         var components = URLComponents(string:  NetworkEndpoint.latest.url)!
@@ -80,6 +79,7 @@ final class DetailsViewModel {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = HTTPSMethod.GET.rawValue
         let task = URLSession.shared.dataTask(with: urlRequest) {[weak self] data, response, err in
+            
             guard let data = data else {return}
             do {
                 guard  let data = try? JSONDecoder().decode(LatestRates.self, from: data) else {return}

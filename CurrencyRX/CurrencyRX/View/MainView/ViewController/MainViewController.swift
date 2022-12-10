@@ -24,11 +24,9 @@ class MainViewController: UIViewController {
     private let disposeBag = DisposeBag()
     let mainViewModel = MainViewModel()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        mainViewModel.fetchAvalibleCurrencies()
         bindLoadingView()
         bindTableView()
         subscribeToTableViewDidSelect()
@@ -44,8 +42,11 @@ class MainViewController: UIViewController {
         didTapOnDetails()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        mainViewModel.fetchAvalibleCurrencies()
+    }
     
-    func bindLoadingView() {
+  private  func bindLoadingView() {
         mainViewModel.loadingBehaviour.observe(on: MainScheduler.instance).subscribe(onNext: { isLoading in
             if isLoading {
                 self.loadingView.isHidden = false
@@ -57,7 +58,7 @@ class MainViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
-    func subscribeToSelectedToCountry() {
+    private func subscribeToSelectedToCountry() {
         toButton.rx.tap.subscribe { [weak self](_) in
             self?.mainViewModel.didSelectTo.accept(true)
             self?.mainViewModel.didselectFrom.accept(false)
@@ -66,12 +67,12 @@ class MainViewController: UIViewController {
         
     }
     
-    func subscribeTodisableDetails() {
+    private func subscribeTodisableDetails() {
         mainViewModel.isDetailsButtonEnabled.bind(to: detailsButton.rx.isEnabled)
             .disposed(by: disposeBag)
     }
     
-    func didTapOnDetails() {
+    private func didTapOnDetails() {
         detailsButton.rx.tap.subscribe { [weak self] (_) in
             print("Navigating")
             self?.navigateToDetailsView()
@@ -79,7 +80,7 @@ class MainViewController: UIViewController {
         .disposed(by: disposeBag)
     }
     
-    func subscribeToSelectedFromCountry() {
+    private func subscribeToSelectedFromCountry() {
         fromButton.rx.tap.subscribe { [weak self](_) in
             self?.dropDownTableView.isHidden.toggle()
             self?.mainViewModel.didSelectTo.accept(false)
@@ -87,16 +88,16 @@ class MainViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
     
-    func subscribeToResultLabel() {
+    private func subscribeToResultLabel() {
         mainViewModel.resultConverted
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self]value in
-            self?.convertedTolabel.text = value.element?.description
-        }
-        .disposed(by: disposeBag)
+                self?.convertedTolabel.text =  value.element?.roundToDecimal(3).removeZerosFromEnd()
+            }
+            .disposed(by: disposeBag)
     }
     
-    func subscribeToSwitchButton() {
+    private func subscribeToSwitchButton() {
         switchButton.rx.tap.subscribe { [weak self](_) in
             self?.mainViewModel.countryCodeSelectedFrom.accept(self?.toLabel.text ?? "")
             self?.mainViewModel.countryCodeSelectedTo.accept(self?.fromLabel.text ?? "")
@@ -108,8 +109,7 @@ class MainViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
     
-    
-    func subscribeTodisableSwitch() {
+    private func subscribeTodisableSwitch() {
         mainViewModel.isSwitchButtonEnabled.bind(to: switchButton.rx.isEnabled)
             .disposed(by: disposeBag)
     }
@@ -117,23 +117,26 @@ class MainViewController: UIViewController {
     func subscribeToConvertTextField() {
         converTextField.rx.text.orEmpty.bind(to: mainViewModel.converFromBehavior)
             .disposed(by: disposeBag)
-        }
+    }
     
-    func subscribetToConvertCurrency() {
-        
+    private func subscribetToConvertCurrency() {
         converTextField.rx.text.orEmpty
             .skip(1)
             .distinctUntilChanged()
             .throttle(RxTimeInterval.microseconds(500), scheduler: MainScheduler.instance)
-            .subscribe { value in
-                if !(value.element?.isEmpty ?? false) && value.element != "0" {
+            .subscribe {[weak self ] value in
+                guard let self = self else {return}
+                if self.mainViewModel.countryCodeSelectedFrom.value.isEmpty && self.mainViewModel.countryCodeSelectedTo.value.isEmpty {
+                    self.mainViewModel.errorMessageBehaviour.accept("Please select country to convert")
+                    self.mainViewModel.errorBehavior.accept(true)
+                } else if !(value.element?.isEmpty ?? false) && value.element != "0" {
                     self.mainViewModel.convertCurrencies()
                 }
             }.disposed(by: disposeBag)
     }
     
     
-    func bindTableView() {
+    private func bindTableView() {
         mainViewModel.countriesCodeBehaviour.bind(to: dropDownTableView.rx.items(cellIdentifier: "CellIdentifier", cellType: DropDownCell.self)) { row, model, cell in
             cell.configureCell(currency: model)
         }.disposed(by: disposeBag)
@@ -148,12 +151,10 @@ class MainViewController: UIViewController {
                 if error.element ?? false  {
                     self?.errorAlert()
                 }
-                
-        }.disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
     }
     
-    
-    func subscribeToTableViewDidSelect() {
+    private func subscribeToTableViewDidSelect() {
         dropDownTableView.rx.itemSelected.subscribe(onNext: { [weak self] (indexPath) in
             self?.dropDownTableView.deselectRow(at: indexPath, animated: true)
             if self?.mainViewModel.didselectFrom.value ?? false {
@@ -167,7 +168,7 @@ class MainViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
-    func errorAlert() {
+    private func errorAlert() {
         let alert = UIAlertController(title: "Error", message: mainViewModel.errorMessageBehaviour.value, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "ok", style: .cancel, handler: { [weak self]_ in
             self?.mainViewModel.errorBehavior.accept(false)
@@ -175,14 +176,13 @@ class MainViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    
-    func navigateToDetailsView() {
+    private func navigateToDetailsView() {
         let detailsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "DetailsViewController") as DetailsViewController
-         detailsVC.selectedFromCurrency = mainViewModel.countryCodeSelectedFrom.value
+        detailsVC.selectedFromCurrency = mainViewModel.countryCodeSelectedFrom.value
+        detailsVC.selectedToCurrnecy = mainViewModel.countryCodeSelectedTo.value
         for symbol in mainViewModel.countriesCodeBehaviour.value.filter({$0 != mainViewModel.countryCodeSelectedFrom.value }) {
-           
             detailsVC.latestSymbols.append(symbol)
         }
-            self.present(detailsVC, animated: true)
+        self.present(detailsVC, animated: true)
     }
 }
