@@ -6,3 +6,11 @@ target 'CurrencyRX' do
     pod 'RxCocoa'
     pod 'RxDataSources'
 end
+
+target 'CurrencyRXTests' do
+    pod 'RxBlocking'
+    pod 'RxTest'
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'RxDataSources'
+end
