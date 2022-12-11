@@ -72,6 +72,9 @@ class MainViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    
+  
+    
     private func didTapOnDetails() {
         detailsButton.rx.tap.subscribe { [weak self] (_) in
             print("Navigating")
@@ -126,7 +129,7 @@ class MainViewController: UIViewController {
             .throttle(RxTimeInterval.microseconds(500), scheduler: MainScheduler.instance)
             .subscribe {[weak self ] value in
                 guard let self = self else {return}
-                if self.mainViewModel.countryCodeSelectedFrom.value.isEmpty && self.mainViewModel.countryCodeSelectedTo.value.isEmpty {
+                if self.mainViewModel.countryCodeSelectedFrom.value.isEmpty || self.mainViewModel.countryCodeSelectedTo.value.isEmpty {
                     self.mainViewModel.errorMessageBehaviour.accept("Please select country to convert")
                     self.mainViewModel.errorBehavior.accept(true)
                 } else if !(value.element?.isEmpty ?? false) && value.element != "0" {
@@ -173,7 +176,14 @@ class MainViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "ok", style: .cancel, handler: { [weak self]_ in
             self?.mainViewModel.errorBehavior.accept(false)
         }))
-        self.present(alert, animated: true, completion: nil)
+        mainViewModel.errorObservable.subscribe { value in
+            if value {
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        .disposed(by: disposeBag)
+//
+        
     }
     
     private func navigateToDetailsView() {

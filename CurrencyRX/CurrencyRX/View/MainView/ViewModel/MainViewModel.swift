@@ -19,11 +19,14 @@ final class MainViewModel {
     var didselectFrom = BehaviorRelay<Bool>(value: false)
     var didSelectTo = BehaviorRelay<Bool>(value: false)
     var enableSwitchBehaviour = BehaviorRelay<Bool>(value: false)
+    var enableDetailBehaviour = BehaviorRelay<Bool>(value: false)
     var errorBehavior = BehaviorRelay<Bool>(value: false)
     var errorMessageBehaviour = BehaviorRelay<String>(value: "")
     var symbolKeys = [String]()
     var resultConverted = BehaviorRelay<Double>(value: 0.0)
     private var countriesModel = PublishSubject<CountriesSymbol>()
+    
+    
     
     var isCountryFromSelected: Observable<Bool> {
         return countryCodeSelectedFrom.asObservable().map { (country) -> Bool in
@@ -58,10 +61,31 @@ final class MainViewModel {
             return detailsEnabled
         }
     }
+    
     var countriesModelObeservable: Observable<CountriesSymbol> {
         return countriesModel
     }
- 
+    
+    
+    var validateFieldsObservable: Observable<Bool> {
+        return Observable.combineLatest(isCountryFromSelected, isCountryToSelected) { [weak self](fromSelected, toSelected) in
+            let isValid =  fromSelected && toSelected
+            print("isValidValue: \(isValid)")
+            self?.errorBehavior.accept(isValid)
+            return isValid
+        }
+    }
+
+    var errorObservable: Observable<Bool> {
+        return validateFieldsObservable.asObservable().map { value in
+            print("showerror: \(value)")
+            let showError = !value
+            print("showerror: \(showError)")
+            return showError
+        }
+    }
+    
+    
     func fetchAvalibleCurrencies() {
         loadingBehaviour.accept(true)
         var components = URLComponents(string:  NetworkEndpoint.symbols.url)!
@@ -80,8 +104,8 @@ final class MainViewModel {
                     self?.countriesCodeBehaviour.accept(data.getKeysArra())
                     self?.loadingBehaviour.accept(false)
                 } else {
-                    self?.errorBehavior.accept(true)
                     self?.errorMessageBehaviour.accept("Error in fetching list")
+                    self?.errorBehavior.accept(true)
                     self?.loadingBehaviour.accept(false)
                 }
             } catch let parseError {

@@ -5,12 +5,14 @@ target 'CurrencyRX' do
     pod 'RxSwift'
     pod 'RxCocoa'
     pod 'RxDataSources'
-end
+  
 
-target 'CurrencyRXTests' do
+  target 'CurrencyRXTests' do
+    inherit! :search_paths
     pod 'RxBlocking'
     pod 'RxTest'
-    pod 'RxSwift'
-    pod 'RxCocoa'
-    pod 'RxDataSources'
+
+  end
 end
+
+ 
