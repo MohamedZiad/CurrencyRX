@@ -7,7 +7,25 @@
 		<key>CurrencyRX.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>9</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>D6F0E17B2942A55900A9567D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D6F0E1912942A55C00A9567D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D6F0E19B2942A55C00A9567D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
