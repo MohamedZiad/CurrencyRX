@@ -27,6 +27,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setCornerRadius()
         bindLoadingView()
         bindTableView()
         subscribeToTableViewDidSelect()
@@ -40,10 +41,17 @@ class MainViewController: UIViewController {
         subscribeToError()
         subscribeTodisableDetails()
         didTapOnDetails()
+        mainViewModel.fetchAvalibleCurrencies(completion: {result in
+            print("ViewModelResult: \(result)")
+        })
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        mainViewModel.fetchAvalibleCurrencies()
+    
+    func setCornerRadius() {
+        fromButton.layer.cornerRadius = 8
+        toButton.layer.cornerRadius = 8
+        detailsButton.layer.cornerRadius = 8
+        switchButton.layer.cornerRadius = 8
     }
     
   private  func bindLoadingView() {
@@ -172,7 +180,7 @@ class MainViewController: UIViewController {
     
     private func errorAlert() {
         let alert = UIAlertController(title: "Error", message: mainViewModel.errorMessageBehaviour.value, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "ok", style: .cancel, handler: { [weak self]_ in
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { [weak self]_ in
             self?.mainViewModel.errorBehavior.accept(false)
         }))
         mainViewModel.errorObservable.observe(on: MainScheduler.instance).subscribe { value in

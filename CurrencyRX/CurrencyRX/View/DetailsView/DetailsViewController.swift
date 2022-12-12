@@ -28,6 +28,9 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingView.isHidden = false
+        activityIndicator.startAnimating()
+        bindLoadingView()
         getDetails()
         detailsViewModel.getDate()
         bindHistoryTableView()
@@ -45,7 +48,9 @@ class DetailsViewController: UIViewController {
     }
     
     private  func bindLoadingView() {
-        detailsViewModel.loadingBehaviour.observe(on: MainScheduler.instance).subscribe(onNext: { isLoading in
+        detailsViewModel.loadingBehaviour
+            .skip(1)
+            .observe(on: MainScheduler.instance).subscribe(onNext: { isLoading in
             if isLoading {
                 self.loadingView.isHidden = false
                 self.activityIndicator.startAnimating()

@@ -20,13 +20,20 @@ class ViewModelTests: XCTestCase {
     var viewModel: MainViewModel!
     var scheduler: ConcurrentDispatchQueueScheduler!
     var testScheduler: TestScheduler!
-    let mockSession = URLSessionMock()
+    var expectation: XCTestExpectation!
+    
+    
     override func setUp() {
         super.setUp()
         disposeBag = DisposeBag()
         viewModel = MainViewModel()
         scheduler = ConcurrentDispatchQueueScheduler(qos: .default)
         testScheduler = TestScheduler(initialClock: 0)
+        let configuration = URLSessionConfiguration.default
+        let urlSession = URLSession.init(configuration: configuration)
+        configuration.protocolClasses = [MockURLProtocol.self]
+        viewModel = MainViewModel(urlSession: urlSession)
+        
     }
 
     override func tearDown() {
@@ -107,4 +114,33 @@ class ViewModelTests: XCTestCase {
         XCTAssertEqual(convertErrorResult, expectedShowError)
         
     }
+    
+    
+//    func test_mockfetch () {
+//        guard let fetchFailFile = Bundle.main.url(forResource: "FetchSymbolsFailResponse", withExtension: "json"),  let url = URL(string:NetworkEndpoint.symbols.url)  else {return}
+//        let fileData = try? Data(contentsOf: fetchFailFile)
+//
+//
+//
+//
+//        MockURLProtocol.requestHandler = { request in
+//            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+//            print(response, fileData)
+//            return (response, fileData)
+//        }
+//
+//        viewModel.fetchAvalibleCurrencies { result in
+//            switch result {
+//            case .Failure(let err):
+//                print("Err:\(err)")
+//                self.expectation.fulfill()
+//            case .Success(let symbo):
+//                XCTFail("Success response was not expected.")
+//
+//            }
+//            self.expectation.fulfill()
+//        }
+//
+//    }
+   
 }

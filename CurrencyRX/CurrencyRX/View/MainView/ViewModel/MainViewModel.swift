@@ -25,8 +25,14 @@ final class MainViewModel {
     var symbolKeys = [String]()
     var resultConverted = BehaviorRelay<Double>(value: 0.0)
     private var countriesModel = PublishSubject<CountriesSymbol>()
+    let urlSession: URLSession
     
     
+    
+    init(urlSession: URLSession = .shared) {
+        self.urlSession = urlSession
+        
+    }
     
     var isCountryFromSelected: Observable<Bool> {
         return countryCodeSelectedFrom.asObservable().map { (country) -> Bool in
@@ -77,7 +83,9 @@ final class MainViewModel {
     }
 
     var errorObservable: Observable<Bool> {
-        return validateFieldsObservable.asObservable().map { value in
+        return validateFieldsObservable
+            .asObservable()
+            .map { value in
             print("showerror: \(value)")
             let showError = !value
             print("showerror: \(showError)")
@@ -86,7 +94,7 @@ final class MainViewModel {
     }
     
     
-    func fetchAvalibleCurrencies() {
+    func fetchAvalibleCurrencies(completion: (@escaping(_ result: Result<CountriesSymbol, Error>) -> ())) {
         loadingBehaviour.accept(true)
         var components = URLComponents(string:  NetworkEndpoint.symbols.url)!
         let parameters = ["apikey": APIClient.api_key]
@@ -94,8 +102,12 @@ final class MainViewModel {
         let url = components.url!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = HTTPSMethod.GET.rawValue
-        let task = URLSession.shared.dataTask(with: url) {[weak self] data, response, err in
+        
+        
+        
+        let task = urlSession.dataTask(with: url) {[weak self] data, response, err in
             if let err = err {
+                completion(.Failure(err))
                 print(err.localizedDescription)
                 self?.errorBehavior.accept(true)
                 self?.errorMessageBehaviour.accept(err.localizedDescription)
@@ -107,18 +119,18 @@ final class MainViewModel {
                     var countryData = try JSONDecoder().decode(CountriesSymbol.self, from: data)
                     
                     if countryData.success ?? false {
-                        
+                        completion(.Success(countryData))
                         self?.errorBehavior.accept(false)
                         self?.countriesCodeBehaviour.accept(countryData.getKeysArra())
                         self?.loadingBehaviour.accept(false)
                     } else {
-                        
                         
                         self?.errorMessageBehaviour.accept("Error in fetching list")
                         self?.errorBehavior.accept(true)
                         self?.loadingBehaviour.accept(false)
                     }
                 } catch let parseError {
+                    completion(.Failure(parseError))
                     print("Error in fetch:\(parseError.localizedDescription)")
                     self?.errorBehavior.accept(true)
                     self?.errorMessageBehaviour.accept("Error in fetching list")
@@ -128,7 +140,6 @@ final class MainViewModel {
             }
         }
         task.resume()
-      
     }
     
     
