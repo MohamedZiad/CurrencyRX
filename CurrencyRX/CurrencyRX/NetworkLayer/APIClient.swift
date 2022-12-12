@@ -11,7 +11,7 @@ import RxSwift
 class APIClient {
         
     
-    static let api_key = "MLCrE8Z3iG02346EdLA5Sp1HuEUgAPiN"
+    static let api_key = "kEehub1SCPzXNIlooDHhyGCmDuWZoFin"
     static let baseURL = URL(string: "https://data.fixer.io/api/")!
     static let shared = APIClient()
     

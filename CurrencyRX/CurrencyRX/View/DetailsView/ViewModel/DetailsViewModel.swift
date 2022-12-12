@@ -36,24 +36,33 @@ final class DetailsViewModel {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = HTTPSMethod.GET.rawValue
         let task = URLSession.shared.dataTask(with: urlRequest) {[weak self] data, response, err in
-            guard let data = data else {return}
-            do {
-                guard  let data = try? JSONDecoder().decode(TimeSeries.self, from: data) else {return}
-                if data.success {
-                    self?.errorBehavior.accept(false)
-                    self?.loadingBehaviour.accept(false)
-                    self?.detailsModel.onNext(data)
-                } else {
-                    self?.errorBehavior.accept(true)
-                    self?.errorMessageBehaviour.accept("Error in fetching list")
-                    self?.loadingBehaviour.accept(false)
-                }
-            } catch let parseError {
-                print("Error in fetch:\(parseError.localizedDescription)")
+            if let error = err {
+                print("Error in fetch:\(error.localizedDescription)")
                 self?.errorBehavior.accept(true)
                 self?.errorMessageBehaviour.accept("Error in fetching list")
                 self?.loadingBehaviour.accept(false)
-                
+            } else {
+                guard let data = data else {return}
+                do {
+                    var timeSeries = try? JSONDecoder().decode(TimeSeries.self, from: data)
+                    if timeSeries?.success ?? false{
+                        if let timeSeries = timeSeries {
+                            self?.errorBehavior.accept(false)
+                            self?.loadingBehaviour.accept(false)
+                            self?.detailsModel.onNext(timeSeries)
+                        }
+                    } else {
+                        self?.errorBehavior.accept(true)
+                        self?.errorMessageBehaviour.accept("Error in fetching list")
+                        self?.loadingBehaviour.accept(false)
+                    }
+                } catch let parseError {
+                    print("Error in fetch:\(parseError.localizedDescription)")
+                    self?.errorBehavior.accept(true)
+                    self?.errorMessageBehaviour.accept("Error in fetching list")
+                    self?.loadingBehaviour.accept(false)
+                    
+                }
             }
         }
         task.resume()
@@ -79,25 +88,33 @@ final class DetailsViewModel {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = HTTPSMethod.GET.rawValue
         let task = URLSession.shared.dataTask(with: urlRequest) {[weak self] data, response, err in
-            
-            guard let data = data else {return}
-            do {
-                guard  let data = try? JSONDecoder().decode(LatestRates.self, from: data) else {return}
-                if data.success ?? false {
-                    self?.errorBehavior.accept(false)
-                    self?.loadingBehaviour.accept(false)
-                    self?.latestSymbols.onNext(data)
-                } else {
-                    self?.errorBehavior.accept(true)
-                    self?.errorMessageBehaviour.accept("Error in fetching list")
-                    self?.loadingBehaviour.accept(false)
-                }
-            } catch let parseError {
-                print("Error in fetch:\(parseError.localizedDescription)")
+            if let error  =  err {
+                print("Error in fetch:\(error.localizedDescription)")
                 self?.errorBehavior.accept(true)
                 self?.errorMessageBehaviour.accept("Error in fetching list")
                 self?.loadingBehaviour.accept(false)
-                
+            } else {
+                guard let data = data else {return}
+                do {
+                    var latestRate = try? JSONDecoder().decode(LatestRates.self, from: data)
+                    if latestRate?.success ?? false {
+                        if let latestRate = latestRate {
+                            self?.errorBehavior.accept(false)
+                            self?.loadingBehaviour.accept(false)
+                            self?.latestSymbols.onNext(latestRate)
+                        }
+                    } else {
+                        self?.errorBehavior.accept(true)
+                        self?.errorMessageBehaviour.accept("Error in fetching list")
+                        self?.loadingBehaviour.accept(false)
+                    }
+                } catch let parseError {
+                    print("Error in fetch:\(parseError.localizedDescription)")
+                    self?.errorBehavior.accept(true)
+                    self?.errorMessageBehaviour.accept("Error in fetching list")
+                    self?.loadingBehaviour.accept(false)
+                    
+                }
             }
         }
         task.resume()

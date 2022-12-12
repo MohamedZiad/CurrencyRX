@@ -15,7 +15,9 @@ import SwiftUI
 class DetailsViewController: UIViewController {
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var latestTableView: UITableView!
-    
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var selectedFromCurrency: String? = ""
     var selectedToCurrnecy: String? = ""
     var latestSymbols: [String] = []
@@ -24,7 +26,6 @@ class DetailsViewController: UIViewController {
     var chartModel = ChartModel(data: [])
     var tranarray: [ChartResultModel] = []
     
-    @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         getDetails()
@@ -41,6 +42,18 @@ class DetailsViewController: UIViewController {
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true)
         
+    }
+    
+    private  func bindLoadingView() {
+        detailsViewModel.loadingBehaviour.observe(on: MainScheduler.instance).subscribe(onNext: { isLoading in
+            if isLoading {
+                self.loadingView.isHidden = false
+                self.activityIndicator.startAnimating()
+            } else {
+                self.loadingView.isHidden = true
+                self.activityIndicator.stopAnimating()
+            }
+        }).disposed(by: disposeBag)
     }
 
     private func getDetails() {

@@ -59,7 +59,8 @@ class MainViewController: UIViewController {
     }
     
     private func subscribeToSelectedToCountry() {
-        toButton.rx.tap.subscribe { [weak self](_) in
+        toButton.rx.tap
+            .subscribe { [weak self](_) in
             self?.mainViewModel.didSelectTo.accept(true)
             self?.mainViewModel.didselectFrom.accept(false)
             self?.dropDownTableView.isHidden.toggle()
@@ -71,9 +72,6 @@ class MainViewController: UIViewController {
         mainViewModel.isDetailsButtonEnabled.bind(to: detailsButton.rx.isEnabled)
             .disposed(by: disposeBag)
     }
-    
-    
-  
     
     private func didTapOnDetails() {
         detailsButton.rx.tap.subscribe { [weak self] (_) in
@@ -129,7 +127,7 @@ class MainViewController: UIViewController {
             .throttle(RxTimeInterval.microseconds(500), scheduler: MainScheduler.instance)
             .subscribe {[weak self ] value in
                 guard let self = self else {return}
-                if self.mainViewModel.countryCodeSelectedFrom.value.isEmpty || self.mainViewModel.countryCodeSelectedTo.value.isEmpty {
+                if self.mainViewModel.countryCodeSelectedFrom.value.isEmpty && self.mainViewModel.countryCodeSelectedTo.value.isEmpty {
                     self.mainViewModel.errorMessageBehaviour.accept("Please select country to convert")
                     self.mainViewModel.errorBehavior.accept(true)
                 } else if !(value.element?.isEmpty ?? false) && value.element != "0" {
@@ -148,8 +146,9 @@ class MainViewController: UIViewController {
     
     func subscribeToError() {
         mainViewModel.errorBehavior
+            .distinctUntilChanged()
             .asObservable()
-            .observe(on: MainScheduler.instance)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe {[weak self] error in
                 if error.element ?? false  {
                     self?.errorAlert()
@@ -176,14 +175,12 @@ class MainViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "ok", style: .cancel, handler: { [weak self]_ in
             self?.mainViewModel.errorBehavior.accept(false)
         }))
-        mainViewModel.errorObservable.subscribe { value in
+        mainViewModel.errorObservable.observe(on: MainScheduler.instance).subscribe { value in
             if value {
                 self.present(alert, animated: true, completion: nil)
             }
         }
         .disposed(by: disposeBag)
-//
-        
     }
     
     private func navigateToDetailsView() {

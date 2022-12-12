@@ -29,6 +29,9 @@
 		D6B21B6C294539AC003F8C03 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B21B6B294539AC003F8C03 /* Double.swift */; };
 		D6B21B6F29453B47003F8C03 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B21B6E29453B47003F8C03 /* MainViewModelTests.swift */; };
 		D6D4F9F42942CCEC00AEDDED /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4F9F32942CCEC00AEDDED /* CurrencyService.swift */; };
+		D6D5E69E294684A400F0FD77 /* MockAPILayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D5E69D294684A400F0FD77 /* MockAPILayer.swift */; };
+		D6D5E6A0294695DE00F0FD77 /* FetchSymbolsFailResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = D6D5E69B294673FD00F0FD77 /* FetchSymbolsFailResponse.json */; };
+		D6D5E6A1294695E100F0FD77 /* FetchSymbolsSuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = D6D5E69C2946742800F0FD77 /* FetchSymbolsSuccessResponse.json */; };
 		D6F0E1802942A55900A9567D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0E17F2942A55900A9567D /* AppDelegate.swift */; };
 		D6F0E1822942A55900A9567D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0E1812942A55900A9567D /* SceneDelegate.swift */; };
 		D6F0E1842942A55A00A9567D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0E1832942A55900A9567D /* ViewController.swift */; };
@@ -92,8 +95,9 @@
 		D6B21B6B294539AC003F8C03 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		D6B21B6E29453B47003F8C03 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		D6D4F9F32942CCEC00AEDDED /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
-		D6D5E69B294673FD00F0FD77 /* FetchSymbolsFailResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FetchSymbolsFailResponse.json; sourceTree = "<group>"; };
+		D6D5E69B294673FD00F0FD77 /* FetchSymbolsFailResponse.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = FetchSymbolsFailResponse.json; sourceTree = "<group>"; };
 		D6D5E69C2946742800F0FD77 /* FetchSymbolsSuccessResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FetchSymbolsSuccessResponse.json; sourceTree = "<group>"; };
+		D6D5E69D294684A400F0FD77 /* MockAPILayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPILayer.swift; sourceTree = "<group>"; };
 		D6F0E17C2942A55900A9567D /* CurrencyRX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyRX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F0E17F2942A55900A9567D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6F0E1812942A55900A9567D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -270,6 +274,8 @@
 				D6F0E17F2942A55900A9567D /* AppDelegate.swift */,
 				D6F0E1812942A55900A9567D /* SceneDelegate.swift */,
 				D6F0E1832942A55900A9567D /* ViewController.swift */,
+				D6D5E69B294673FD00F0FD77 /* FetchSymbolsFailResponse.json */,
+				D6D5E69C2946742800F0FD77 /* FetchSymbolsSuccessResponse.json */,
 				D6F0E1882942A55C00A9567D /* Assets.xcassets */,
 				D6F0E18A2942A55C00A9567D /* LaunchScreen.storyboard */,
 				D6F0E18D2942A55C00A9567D /* Info.plist */,
@@ -281,8 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				D6F0E1962942A55C00A9567D /* CurrencyRXTests.swift */,
-				D6D5E69B294673FD00F0FD77 /* FetchSymbolsFailResponse.json */,
-				D6D5E69C2946742800F0FD77 /* FetchSymbolsSuccessResponse.json */,
 				D6B21B6E29453B47003F8C03 /* MainViewModelTests.swift */,
 			);
 			path = CurrencyRXTests;
@@ -302,6 +306,7 @@
 			children = (
 				D6F0E1B02942A65700A9567D /* APIRequest.swift */,
 				D6F0E1B22942A66B00A9567D /* APIClient.swift */,
+				D6D5E69D294684A400F0FD77 /* MockAPILayer.swift */,
 				D6F0E1B42942A68500A9567D /* SymbolsRequest.swift */,
 				D6F0E1B62942A69600A9567D /* EndPoints.swift */,
 			);
@@ -481,7 +486,9 @@
 			files = (
 				D6F0E18C2942A55C00A9567D /* LaunchScreen.storyboard in Resources */,
 				D6F0E1892942A55C00A9567D /* Assets.xcassets in Resources */,
+				D6D5E6A1294695E100F0FD77 /* FetchSymbolsSuccessResponse.json in Resources */,
 				D6F0E1872942A55A00A9567D /* Main.storyboard in Resources */,
+				D6D5E6A0294695DE00F0FD77 /* FetchSymbolsFailResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +574,7 @@
 				D6B21B5529447132003F8C03 /* CALayer.swift in Sources */,
 				D6B21B5029444553003F8C03 /* OtherCurrenciesCell.swift in Sources */,
 				D6B21B592944E8D6003F8C03 /* HistoricalChartView.swift in Sources */,
+				D6D5E69E294684A400F0FD77 /* MockAPILayer.swift in Sources */,
 				D6B21B5B29452060003F8C03 /* ConvertResult.swift in Sources */,
 				D6B21B5D29452077003F8C03 /* TimeSeries.swift in Sources */,
 				D6B21B5F29452092003F8C03 /* Transaction.swift in Sources */,

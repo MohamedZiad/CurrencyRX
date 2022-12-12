@@ -20,15 +20,13 @@ class ViewModelTests: XCTestCase {
     var viewModel: MainViewModel!
     var scheduler: ConcurrentDispatchQueueScheduler!
     var testScheduler: TestScheduler!
-
+    let mockSession = URLSessionMock()
     override func setUp() {
         super.setUp()
         disposeBag = DisposeBag()
         viewModel = MainViewModel()
         scheduler = ConcurrentDispatchQueueScheduler(qos: .default)
         testScheduler = TestScheduler(initialClock: 0)
-        
-        
     }
 
     override func tearDown() {
@@ -53,7 +51,7 @@ class ViewModelTests: XCTestCase {
 //Detail Button Enabled
         var detailResult = Bool()
         viewModel.isDetailsButtonEnabled.subscribe { vale in
-            result = vale
+            detailResult = vale
         }.disposed(by: DisposeBag())
         let expectedValueDetails =  false
         testScheduler.start()
@@ -107,16 +105,6 @@ class ViewModelTests: XCTestCase {
         let expectedShowError =  false
         testScheduler.start()
         XCTAssertEqual(convertErrorResult, expectedShowError)
-
-    }
-
-    
-    
-    func testFetchApi() {
-        
-    }
-    
-    func testConvertApi() {
         
     }
 }

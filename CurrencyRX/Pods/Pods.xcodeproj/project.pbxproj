@@ -554,7 +554,7 @@
 		240B19C7D2250F4AD538DE3967FB5BA3 /* RxTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RxTest.debug.xcconfig; sourceTree = "<group>"; };
 		24BC49942C4214C8E295C2D4915C5161 /* ObservableType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObservableType.swift; path = RxSwift/ObservableType.swift; sourceTree = "<group>"; };
 		24BF0EB68FBBC0054C242535A7345F87 /* SerialDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SerialDisposable.swift; path = RxSwift/Disposables/SerialDisposable.swift; sourceTree = "<group>"; };
-		25F63A531105CD4E1E4CCF5B918C5494 /* RxBlocking */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = RxBlocking; path = libRxBlocking.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		25F63A531105CD4E1E4CCF5B918C5494 /* libRxBlocking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRxBlocking.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2693F893B9682CFBD11FC3608A85261A /* RxDataSources-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxDataSources-prefix.pch"; sourceTree = "<group>"; };
 		28137CCE941F9403A3BB43FDA60FC67B /* SharedSequence+Operators.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SharedSequence+Operators.swift"; path = "RxCocoa/Traits/SharedSequence/SharedSequence+Operators.swift"; sourceTree = "<group>"; };
 		2884A5D8E3CB2CFD7B3ADB7E670E2A89 /* RxBlocking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RxBlocking.debug.xcconfig; sourceTree = "<group>"; };
@@ -740,7 +740,7 @@
 		9959132B2C7DCB3D0F801B99F973751F /* NSControl+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSControl+Rx.swift"; path = "RxCocoa/macOS/NSControl+Rx.swift"; sourceTree = "<group>"; };
 		9AEC458F371C7E8B6BEC765312311F06 /* ConcurrentMainScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConcurrentMainScheduler.swift; path = RxSwift/Schedulers/ConcurrentMainScheduler.swift; sourceTree = "<group>"; };
 		9C183EEC8FE2CDD27AD8AFEBBD379204 /* RxTest-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RxTest-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DA1125EF2147DC4F6B3E412614F9A8D /* Differentiator-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Differentiator-umbrella.h"; sourceTree = "<group>"; };
 		9DA54974A8CDB16A514D958B864CFE3E /* Infallible+Concurrency.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Infallible+Concurrency.swift"; path = "RxSwift/Traits/Infallible/Infallible+Concurrency.swift"; sourceTree = "<group>"; };
 		9DE1542530569CA24F332BE8A1A3DA56 /* Pods-CurrencyRX-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CurrencyRX-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -784,7 +784,7 @@
 		B92B9E61BD14B680070985490664107B /* _RXDelegateProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = _RXDelegateProxy.h; path = RxCocoa/Runtime/include/_RXDelegateProxy.h; sourceTree = "<group>"; };
 		BA5EC4531B24B514EACA42E77D1AEE77 /* Binder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Binder.swift; path = RxSwift/Binder.swift; sourceTree = "<group>"; };
 		BB86C1D7A9D67D9E625F6AE09DEEC117 /* InfiniteSequence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InfiniteSequence.swift; path = Platform/DataStructures/InfiniteSequence.swift; sourceTree = "<group>"; };
-		BC432FD48A5932251F1CAFBC4BF74894 /* RxCocoa */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = RxCocoa; path = libRxCocoa.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC432FD48A5932251F1CAFBC4BF74894 /* libRxCocoa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRxCocoa.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCED59EDAA17DF3FD32287D35DA964E9 /* RxPickerViewDelegateProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxPickerViewDelegateProxy.swift; path = RxCocoa/iOS/Proxies/RxPickerViewDelegateProxy.swift; sourceTree = "<group>"; };
 		BD009F3E2E901E27B924DAE7090BA1FD /* RxDataSources-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RxDataSources-dummy.m"; sourceTree = "<group>"; };
 		BD5804F6025905A648CF25EE828CE68E /* SubjectType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SubjectType.swift; path = RxSwift/Subjects/SubjectType.swift; sourceTree = "<group>"; };
@@ -1004,7 +1004,6 @@
 				BE801317B9E9A06E39381F24815BFA11 /* XCTest+Rx.swift */,
 				C76A6BB622CA716428EEB9BA3D0EBCBD /* Support Files */,
 			);
-			name = RxTest;
 			path = RxTest;
 			sourceTree = "<group>";
 		};
@@ -1018,7 +1017,6 @@
 				E6A96907E5C0CDD4287CB13A0E3808B7 /* Utils.swift */,
 				1D57FCD58E364C8D2AC5042054FBBDE7 /* Support Files */,
 			);
-			name = RxRelay;
 			path = RxRelay;
 			sourceTree = "<group>";
 		};
@@ -1048,7 +1046,6 @@
 				180D80C051E3406CC80BBEEB9BAE2A8C /* Utilities.swift */,
 				5D1617748D9D680F3011C25828D6FC26 /* Support Files */,
 			);
-			name = Differentiator;
 			path = Differentiator;
 			sourceTree = "<group>";
 		};
@@ -1102,7 +1099,6 @@
 				85ADDE3A4C5D3B51C77F9BD0DE640FBF /* ViewTransition.swift */,
 				763F78C786A09FC13AF95EE4686A7656 /* Support Files */,
 			);
-			name = RxDataSources;
 			path = RxDataSources;
 			sourceTree = "<group>";
 		};
@@ -1112,8 +1108,8 @@
 				D51C3D0C53D23B97B032E3BDD4F82C82 /* Differentiator */,
 				3951662F62987084E11CDF2D98E83EFD /* Pods-CurrencyRX */,
 				2C1964872CB908070D0356822B2719CD /* Pods-CurrencyRXTests */,
-				25F63A531105CD4E1E4CCF5B918C5494 /* RxBlocking */,
-				BC432FD48A5932251F1CAFBC4BF74894 /* RxCocoa */,
+				25F63A531105CD4E1E4CCF5B918C5494 /* libRxBlocking.a */,
+				BC432FD48A5932251F1CAFBC4BF74894 /* libRxCocoa.a */,
 				692F92D73EC27270EA9CC9575C3E65B6 /* RxDataSources */,
 				FF8B264DFE802855D5D67E7CDDABFC3C /* RxRelay */,
 				809C5FAB588354C9BA37DC3EAB8CB45C /* RxSwift */,
@@ -1183,7 +1179,6 @@
 				1F5D9C87F9694B19F249B662CFD780D3 /* RunLoopLock.swift */,
 				7F324D4E3130C180C99094D75BE3A87D /* Support Files */,
 			);
-			name = RxBlocking;
 			path = RxBlocking;
 			sourceTree = "<group>";
 		};
@@ -1352,7 +1347,6 @@
 				C1CBDB75083A5C454078BFDC81E98965 /* Zip+Collection.swift */,
 				F44F617C5EAE43D5454C9173FE5E846B /* Support Files */,
 			);
-			name = RxSwift;
 			path = RxSwift;
 			sourceTree = "<group>";
 		};
@@ -1525,7 +1519,6 @@
 				3AD880F30195AB9301CDED722CB800FB /* WKWebView+Rx.swift */,
 				C3A09600643249FB3647B85980687A72 /* Support Files */,
 			);
-			name = RxCocoa;
 			path = RxCocoa;
 			sourceTree = "<group>";
 		};
@@ -1731,7 +1724,7 @@
 			);
 			name = RxCocoa;
 			productName = RxCocoa;
-			productReference = BC432FD48A5932251F1CAFBC4BF74894 /* RxCocoa */;
+			productReference = BC432FD48A5932251F1CAFBC4BF74894 /* libRxCocoa.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A415D697876E83B325FDBE0A99E91D67 /* Pods-CurrencyRXTests */ = {
@@ -1808,7 +1801,7 @@
 			);
 			name = RxBlocking;
 			productName = RxBlocking;
-			productReference = 25F63A531105CD4E1E4CCF5B918C5494 /* RxBlocking */;
+			productReference = 25F63A531105CD4E1E4CCF5B918C5494 /* libRxBlocking.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -2931,7 +2924,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/RxBlocking/RxBlocking-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = Headers/Public/RxBlocking/RxBlocking.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2956,7 +2949,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/RxBlocking/RxBlocking-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = Headers/Public/RxBlocking/RxBlocking.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";

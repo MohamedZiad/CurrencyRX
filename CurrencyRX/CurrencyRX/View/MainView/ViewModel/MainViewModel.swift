@@ -94,31 +94,42 @@ final class MainViewModel {
         let url = components.url!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = HTTPSMethod.GET.rawValue
-        let task = URLSession.shared.dataTask(with: urlRequest) {[weak self] data, response, err in
-            guard let data = data else {return}
-            do {
-                guard  var data = try? JSONDecoder().decode(CountriesSymbol.self, from: data) else {return}
-                if data.success ?? false {
-                    
-                    self?.errorBehavior.accept(false)
-                    self?.countriesCodeBehaviour.accept(data.getKeysArra())
-                    self?.loadingBehaviour.accept(false)
-                } else {
-                    self?.errorMessageBehaviour.accept("Error in fetching list")
-                    self?.errorBehavior.accept(true)
-                    self?.loadingBehaviour.accept(false)
-                }
-            } catch let parseError {
-                print("Error in fetch:\(parseError.localizedDescription)")
+        let task = URLSession.shared.dataTask(with: url) {[weak self] data, response, err in
+            if let err = err {
+                print(err.localizedDescription)
                 self?.errorBehavior.accept(true)
-                self?.errorMessageBehaviour.accept("Error in fetching list")
+                self?.errorMessageBehaviour.accept(err.localizedDescription)
                 self?.loadingBehaviour.accept(false)
+            } else {
+                guard let data = data else {return}
                 
+                do {
+                    var countryData = try JSONDecoder().decode(CountriesSymbol.self, from: data)
+                    
+                    if countryData.success ?? false {
+                        
+                        self?.errorBehavior.accept(false)
+                        self?.countriesCodeBehaviour.accept(countryData.getKeysArra())
+                        self?.loadingBehaviour.accept(false)
+                    } else {
+                        
+                        
+                        self?.errorMessageBehaviour.accept("Error in fetching list")
+                        self?.errorBehavior.accept(true)
+                        self?.loadingBehaviour.accept(false)
+                    }
+                } catch let parseError {
+                    print("Error in fetch:\(parseError.localizedDescription)")
+                    self?.errorBehavior.accept(true)
+                    self?.errorMessageBehaviour.accept("Error in fetching list")
+                    self?.loadingBehaviour.accept(false)
+                    
+                }
             }
         }
         task.resume()
+      
     }
-    
     
     
     func convertCurrencies() {
@@ -130,20 +141,27 @@ final class MainViewModel {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = HTTPSMethod.GET.rawValue
         let task = URLSession.shared.dataTask(with: urlRequest) {[weak self] data, response, err in
-            guard let data = data else {return}
-            do {
-                guard let data = try? JSONDecoder().decode(CovertResult.self, from: data) else {return}
-                if data.success ?? false {
-                    self?.resultConverted.accept(data.result ?? 0.0)
-                    self?.errorBehavior.accept(false)
-                } else {
-                    self?.errorBehavior.accept(true)
-                    self?.errorMessageBehaviour.accept("Error in converting")
+            if let err = err {
+                print(err.localizedDescription)
+                self?.errorBehavior.accept(true)
+                self?.errorMessageBehaviour.accept(err.localizedDescription)
+                self?.loadingBehaviour.accept(false)
+            } else {
+                guard let data = data else {return}
+                do {
+                    let covertData = try JSONDecoder().decode(CovertResult.self, from: data)
+                    if covertData.success ?? false {
+                        self?.resultConverted.accept(covertData.result ?? 0.0)
+                        self?.errorBehavior.accept(false)
+                    } else {
+                        self?.errorBehavior.accept(true)
+                        self?.errorMessageBehaviour.accept("Error in converting")
+                    }
+                    
+                } catch let parseError {
+                    print("Error in Convert:\(parseError.localizedDescription)")
+                    print(parseError)
                 }
-                
-            } catch let parseError {
-                print("Error in Convert:\(parseError.localizedDescription)")
-                print(parseError)
             }
         }
         task.resume()
