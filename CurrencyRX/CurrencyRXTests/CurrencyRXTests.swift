@@ -6,6 +6,9 @@
 //
 
 import XCTest
+import RxSwift
+import RxCocoa
+
 @testable import CurrencyRX
 
 final class CurrencyRXTests: XCTestCase {

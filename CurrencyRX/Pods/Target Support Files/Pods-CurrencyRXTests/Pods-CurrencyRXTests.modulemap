@@ -1,0 +1,6 @@
+module Pods_CurrencyRXTests {
+  umbrella header "Pods-CurrencyRXTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
